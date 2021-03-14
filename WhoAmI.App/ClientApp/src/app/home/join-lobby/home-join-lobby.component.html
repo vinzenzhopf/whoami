@@ -1,0 +1,32 @@
+<div class="container">
+  <div class="row">
+    <form [formGroup]="joinLobbyForm" (ngSubmit)="onJoinLobbySubmit()" class="container">
+      <div class="container">
+        <div class="row">
+          <div class="col-6">
+            <div class="form-group">
+              <!-- <label for="inputLobbyId" class="visually-hidden">Lobby-ID</label> -->
+              <input type="text" formControlName="lobbyId" class="form-control" id="inputLobbyId" placeholder="Lobby-ID">
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="form-group">
+              <button type="submit" [disabled]="!joinLobbyForm.valid" class="btn btn-primary w-100">Join a existing Lobby</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="row">
+    <form (ngSubmit)="onCreateLobbySubmit()" class="container">
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <button type="submit" class="btn btn-secondary w-100">Create a new Lobby</button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

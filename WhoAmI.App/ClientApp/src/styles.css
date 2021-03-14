@@ -1,0 +1,59 @@
+/* You can add global styles to this file, and also import other style files */
+
+/* Provide sufficient contrast against white background */
+:root {
+  --player-card-bg: #C2873E;
+  --player-card-border: #744917;
+  --player-card-highlight: #744917;
+
+  --character-solved-color: green;
+
+  --lobby-card-bg: #8739BD;
+  --lobby-card-border: #57098F;
+}
+
+
+a {
+  color: #0366d6;
+}
+
+code {
+  color: #e01a76;
+}
+
+.btn-primary {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+
+.no-padding {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+body {
+  width: 100%;
+  height: 100%;
+  background-image: url(/assets/img/background.svg);
+  background-repeat: repeat;
+}
+
+@font-face {
+  font-family: fuzzyHandwriting;
+  src: url(/assets/fonts/ShadowsIntoLight-Regular.ttf);
+}
+
+.main-card {
+  background-color: var(--lobby-card-bg);
+  border: 2px solid var(--lobby-card-border);
+  border-radius: 20px;
+  color: rgb(255, 255, 255);
+}
+
+.highlight-card {
+  background-color: var(--player-card-bg);
+  border: 2px solid var(--player-card-border);
+  border-radius: 15px;
+  color: rgb(66, 44, 10);
+}

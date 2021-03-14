@@ -1,0 +1,28 @@
+.lobby-card {
+  background-color: var(--lobby-card-bg);
+  border: 2px solid var(--lobby-card-border);
+}
+
+.no-padding {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.players div:nth-child(6n+0) .tape {
+  background-image: url(/assets/img/tapes/tape1.png);
+}
+.players div:nth-child(6n+1) .tape {
+  background-image: url(/assets/img/tapes/tape2.png);
+}
+.players div:nth-child(6n+2) .tape {
+  background-image: url(/assets/img/tapes/tape3.png);
+}
+.players div:nth-child(6n+3) .tape {
+  background-image: url(/assets/img/tapes/tape4.png);
+}
+.players div:nth-child(6n+4) .tape {
+  background-image: url(/assets/img/tapes/tape5.png);
+}
+.players div:nth-child(6n+5) .tape {
+  background-image: url(/assets/img/tapes/tape6.png);
+}

@@ -1,0 +1,107 @@
+.player-card {
+  background-color: var(--player-card-bg);
+  border: 2px solid var(--player-card-border);
+  border-radius: 15px;
+  height: 85px;
+  margin: 6px 0px;
+}
+
+.player-id {
+  font-size: small;
+  font-weight: bold;
+  color: var(--player-card-highlight);
+}
+
+.character-btn {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.lobby-owner img{
+  width: 24px;
+  height: 24px;
+  padding-bottom: 6px;
+}
+
+.player-icon{
+  padding: 0px
+}
+
+.player-icon img{
+  width: 50px;
+  padding: 4px 8px 15px 8px;
+}
+
+.player{
+  padding-right: 0;
+  padding-left: 0;
+}
+
+.player-card .card-body {
+  padding: 0.25rem;
+}
+
+.character-title{
+  font-size: small;
+  vertical-align: bottom;
+}
+
+.player-name{
+  font-weight: bold;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.character-tape{
+  background-size: 200px 50px;
+  background-repeat: no-repeat;
+}
+
+.character-name{
+  font-size: xx-large;
+  font-family: fuzzyHandwriting, "Shadows Into Light", sans-serif;
+  font-weight: bold;
+  padding: 0px 20px;
+}
+
+.character-solved {
+  color: var(--character-solved-color);
+}
+
+.info-solved {
+  color: var(--character-solved-color);
+  font-weight: bolder;
+}
+
+/* .info-solved .icon{
+  background-image: url(/assets/img/ok.svg);
+  background-repeat: no-repeat;
+  height: 24px;
+  width: 24px;
+  padding-right: 4px;
+  fill:  green;
+} */
+
+/* .tape {
+  background-size: 200px 50px;
+  background-repeat: no-repeat;
+  background-image: url(/assets/img/tapes/tape4.png);
+} */
+
+.players div:nth-child(6n+0) .tape {
+  background-image: url(/assets/img/tapes/tape1.png);
+}
+.players div:nth-child(6n+1) .tape {
+  background-image: url(/assets/img/tapes/tape2.png);
+}
+.players div:nth-child(6n+2) .tape {
+  background-image: url(/assets/img/tapes/tape3.png);
+}
+.players div:nth-child(6n+3) .tape {
+  background-image: url(/assets/img/tapes/tape4.png);
+}
+.players div:nth-child(6n+4) .tape {
+  background-image: url(/assets/img/tapes/tape5.png);
+}
+.players div:nth-child(6n+5) .tape {
+  background-image: url(/assets/img/tapes/tape6.png);
+}

@@ -1,0 +1,38 @@
+.spacer-mid {
+  height: 1.25rem;
+}
+
+.btn-icon-hover {
+  vertical-align: bottom;
+  margin-left: -20%;
+  margin-right: -20%;
+}
+
+.fa-icon{
+  height: 20px;
+  width: 20px;
+}
+
+/* .player-image {
+} */
+
+.player-image .image {
+  max-width: 100%;
+  height: auto;
+  vertical-align: middle;
+  margin-left: 10%;
+}
+
+.player-image .image img {
+  max-width: 136px;
+  height: auto;
+}
+
+.input-errors {
+  margin-top: 10px;
+  padding: 3px;
+}
+
+.input-errors .input-error {
+  font-size: x-small;
+}

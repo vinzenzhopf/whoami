@@ -1,0 +1,49 @@
+<div class="card w-100 player-card">
+  <div class="card-body">
+    <div class="container">
+      <div class="row">
+        <div class="col-auto no-padding player-icon"><img src={{getPlayerIcon(player.icon)}} /></div>
+        <div class="col player">
+          <div class="container">
+            <div class="row">
+              <div class="col player-name no-padding">
+                {{ player.name }}<span *ngIf="isSelf(player)">&nbsp;&#040;You&#041;</span>
+              </div>
+              <div *ngIf="isOwner(player)" class="col-auto no-padding lobby-owner"><img src="/assets/img/crown.svg" /></div>
+              <div class="col-auto player-id">{{index+1}}</div>
+            </div>
+            <div class="row" *ngIf="isSelf(player) && hasPlayerACharacter(player)">
+              <div class="col-auto character-title no-padding">As:</div>
+              <div class="col no-padding character-tape tape">
+                <div class="character-name" *ngIf="!hasSolved(player)">????????</div>
+                <div class="character-name character-solved" *ngIf="hasSolved(player)">{{ player.characterName }}</div>
+              </div>
+              <div class="col-3 info-solved" *ngIf="hasSolved(player)">
+                <span class="icon"><img src="/assets/img/ok.svg" height="20">&nbsp;Solved</span>
+              </div>
+            </div>
+            <div class="row" *ngIf="isSelf(player) && !hasPlayerACharacter(player)">
+              <div class="col no-padding character-tape tape">
+                <div class="character-name">No character yet...</div>
+              </div>
+            </div>
+            <div class="row" *ngIf="!isSelf(player) && hasPlayerACharacter(player)">
+              <div class="col-auto character-title no-padding">As:</div>
+              <div class="col no-padding character-tape tape">
+                <div class="character-name">{{ player.characterName }}</div>
+              </div>
+              <div class="col-3">
+                <button type="button" class="btn btn-warning btn-block">Solved</button>
+              </div>
+            </div>
+            <div class="row" *ngIf="!isSelf(player) && !hasPlayerACharacter(player)">
+              <div class="col">
+                <button type="button" class="btn btn-warning btn-block">Assign a new Character</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

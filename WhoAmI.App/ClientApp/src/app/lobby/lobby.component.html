@@ -1,0 +1,22 @@
+<div class="card main-card">
+  <div class="card-body">
+    <div class="container">
+      <div class="row">
+        <div class="col-6">
+          <div class="container players">
+            <div *ngFor="let player of lobby.players; let i = index; let even = even" class="row">
+              <app-lobby-player-entry *ngIf="even" [lobby]="lobby" [player]="player" [index]="i" class="w-100"></app-lobby-player-entry>
+            </div>
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="container players">
+            <div *ngFor="let player of lobby.players; let i = index; let odd = odd" class="row">
+              <app-lobby-player-entry *ngIf="odd" [lobby]="lobby" [player]="player" [index]="i" class="w-100"></app-lobby-player-entry>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

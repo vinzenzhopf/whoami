@@ -1,0 +1,29 @@
+<form [formGroup]="yourNameForm" (ngSubmit)="onSubmitName()">
+  <div class="container">
+    <div class="row">
+      <div class="col-auto">
+        <div class="player-image">
+          <span class="image"><img src="{{selectedImagePath}}"></span>
+          <button type="button" (click)="getNewImage()" class="btn btn-primary btn-icon-hover">
+            <img src="/assets/img/fa/redo-alt-solid.svg" class="fa-icon"/>
+          </button>
+        </div>
+      </div>
+      <div class="col">
+        <div class="form-group">
+          <!-- <label for="yourNameInput" class="visually-hidden">Your Name</label> -->
+          <input
+            type="text" formControlName="name" minlength="3"
+            class="form-control" id="yourNameInput" placeholder="Enter your Name" required>
+        </div>
+        <button type="submit" [disabled]="!yourNameForm.valid" class="btn-lg btn-block btn-primary">Start!</button>
+        <div *ngIf="name.invalid && (name.dirty || name.touched)" class="alert alert-danger input-errors">
+          <div *ngIf="name.errors.required" class="input-error">Name is required.</div>
+          <div *ngIf="name.errors.minlength" class="input-error">Name must be at least 3 characters long.</div>
+          <div *ngIf="name.errors.pattern" class="input-error">Only chars allowed.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+

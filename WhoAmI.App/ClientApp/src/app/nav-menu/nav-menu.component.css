@@ -1,0 +1,32 @@
+a.navbar-brand {
+  white-space: normal;
+  text-align: center;
+  word-break: break-all;
+}
+
+.navbar-brand {
+  font-weight: bolder;
+  font-size: xx-large;
+  font-family: fuzzyHandwriting, "Shadows Into Light", sans-serif;
+}
+
+html {
+  font-size: 14px;
+}
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.box-shadow {
+  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}
+
+.navbar {
+  background-color:rgb(3, 114, 181);
+}
+
+.navbar-bottom {
+  border-bottom: 2px solid #dee2e6;
+}
