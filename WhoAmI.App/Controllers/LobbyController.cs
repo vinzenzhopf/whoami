@@ -33,15 +33,16 @@ namespace WhoAmI.App.Controllers
             {
                 return FormattedBadRequest("No Body received!");
             }
-            if (!Guid.TryParse(body?.PlayerId, out var guid))
+            Player player = null;
+            if (Guid.TryParse(body?.PlayerId, out var guid))
             {
-                return FormattedBadRequest("Invalid Player ID");
+                //return FormattedBadRequest("Invalid Player ID");
+                player = PlayerRepository.GetPlayer(guid);
             }
-            var player = PlayerRepository.GetPlayer(guid);
             return LobbyRepository.CreateNewLobby(player, body.LobbySettings);
         }
 
-        [HttpGet]
+        [HttpGet("{id}")]
         public ActionResult<Lobby> Get([FromRoute] string id)
         {
             if (!Guid.TryParse(id, out var guid))

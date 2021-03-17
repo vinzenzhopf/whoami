@@ -1,5 +1,5 @@
-import { PlayerImageService } from './../../services/playerimage.service';
-import { PlayerService } from './../../services/player.service';
+import { PlayerImageService } from '../../services/playerimage.service';
+import { PlayerService } from '../../services/player.service';
 import { AppModule } from '../../app.module';
 import { Component, Inject, NgModule } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
@@ -23,6 +23,8 @@ export class HomeJoinLobbyComponent {
   });
   createLobbyForm = new FormGroup({
   });
+
+
 
   constructor(
     private router: Router,

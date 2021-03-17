@@ -1,115 +1,75 @@
+import { Observable } from 'rxjs';
+import { LobbyService } from 'src/app/services/lobby.service';
+import { PlayerService } from './../services/player.service';
 import { LobbySetting } from '../models/domain/lobbySetting.model';
 import { Lobby } from '../models/domain/lobby.model';
-import { Component, Inject } from '@angular/core';
+import { ApplicationRef, Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { getuid } from 'process';
 import { Player, PlayerIcon } from '../models/domain/player.model';
 import { LobbyMode, NameAssignmentMode } from '../models/domain/lobbySetting.model';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-lobby',
   templateUrl: './lobby.component.html',
   styleUrls: ['./lobby.component.css']
 })
-export class LobbyComponent {
+export class LobbyComponent implements OnInit, OnDestroy {
+  private sub: any;
+
+  lobbyObservable: Observable<Lobby>;
+  playerObservable: Observable<Player>;
   lobby: Lobby;
+  lobbyId: string;
+  player: Player;
+  playerId: string;
 
-  constructor() {
-    this.lobby = this.createDemoLobby();
+  lobbyValid: boolean = false;
+  playerValid: boolean = false;
+
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    private playerService: PlayerService,
+    private lobbyService: LobbyService,
+  ) {
+    this.lobbyValid = false;
+    this.playerValid = false;
+
+    this.lobbyObservable = this.lobbyService.getLobbyObservable();
+    this.playerObservable = this.playerService.getPlayerObservable();
   }
 
-  createDemoLobby(): Lobby {
-    const player: Player = {
-      id: '0001',
-      name: 'Andre',
-      characterName: 'Hitler',
-      guessedCharacterCount: 0,
-      icon: { id: 1 },
-      hasSolved: false
-    };
-    const player2: Player = {
-      id: '0002',
-      name: 'Rupert van da Cow',
-      characterName: 'Sakamoto',
-      guessedCharacterCount: 2,
-      icon: { id: 2 },
-      hasSolved: false
-    };
-    const player3: Player = {
-      id: '0003',
-      name: 'Tschnaifert',
-      characterName: 'Kaiser Nero',
-      guessedCharacterCount: 42,
-      icon: { id: 5 },
-      hasSolved: false
-    };
-    const player4: Player = {
-      id: '0004',
-      name: 'KevKev',
-      characterName: '',
-      guessedCharacterCount: 3,
-      icon: { id: 10 },
-      hasSolved: false
-    };
-    const player5: Player = {
-      id: '0005',
-      name: 'Vinz',
-      characterName: 'Anulf',
-      guessedCharacterCount: -1,
-      icon: { id: 12 },
-      hasSolved: true
-    };
-    const player6: Player = {
-      id: '0005',
-      name: 'Vince',
-      characterName: '',
-      guessedCharacterCount: -1,
-      icon: { id: 12 },
-      hasSolved: false
-    };
-    const player7: Player = {
-      id: '0005',
-      name: 'Vince',
-      characterName: 'Test',
-      guessedCharacterCount: -1,
-      icon: { id: 12 },
-      hasSolved: false
-    };
-    const lobbySetting: LobbySetting = {
-      lobbyMode: LobbyMode.Voice,
-      nameAssignmentMode: NameAssignmentMode.Everybody,
-      openForPublic: false,
-      maxUserCount: 8
-    };
-    const lobby: Lobby = {
-      id: '',
-      players: [ player, player2, player3, player4, player5, player6, player7 ],
-      owner: player,
-      settings: lobbySetting,
-      activePlayer: player
-    };
-    return lobby;
+  ngOnInit() {
+    this.sub = this.route.params.subscribe(params => {
+      const id = params['id'];
+      this.lobbyId = id;
+      console.log('LobbyId: ' + id);
+
+      this.lobbyService.updateLobby(id);
+      this.playerService.updatePlayer();
+    });
+    this.playerService.getPlayerObservable().subscribe(p => {
+      this.player = p;
+      this.playerId = p ? p.id : null;
+      this.playerValid = (p && p.id && p.id !== null);
+      console.log("Lobby: PlayerUpdated", this.player);
+      if(!this.playerValid){
+        console.log("Player not valid!");
+        this.router.navigate(['/join', this.lobbyId ]);
+      }
+    });
+    this.lobbyService.getLobbyObservable().subscribe(l => {
+      this.lobby = l;
+      this.lobbyId = l ? l.id : null;
+      this.lobbyValid = l !== null;
+      console.log("Lobby: LobbyUpdated", this.lobby);
+    });
   }
 
-  isOwner(player: Player): boolean {
-    return player.id === this.lobby.owner.id;
-  }
-
-  getPlayerIcon(playerIcon: PlayerIcon): string {
-    if ( playerIcon === null) {
-      return '/assets/img/playericons/00.png';
-    } else {
-      return '/assets/img/playericons/' + this.zeroPad(playerIcon.id, 2) + '.png';
-    }
-  }
-
-  zeroPad(num, places) {
-    const zero = places - num.toString().length + 1;
-    return Array(+(zero > 0 && zero)).join('0') + num;
-  }
-
-  hasPlayerACharacter(player: Player): boolean {
-    return player.characterName !== '';
+  ngOnDestroy() {
+    this.sub.unsubscribe();
   }
 }
 

@@ -34,7 +34,7 @@ namespace WhoAmI.App.Controllers
             return player;
         }
 
-        [HttpGet]
+        [HttpGet("{id}")]
         public ActionResult<Player> Get([FromRoute] string id)
         {
             if (!Guid.TryParse(id, out var guid))

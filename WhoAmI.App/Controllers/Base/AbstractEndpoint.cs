@@ -60,7 +60,7 @@ namespace WhoAmI.App.Controllers.Base
 
         private JsonResult Json(object p)
         {
-            throw new NotImplementedException();
+            return new JsonResult(p);
         }
 
         protected JsonResult FormattedCreated()

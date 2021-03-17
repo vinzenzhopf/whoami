@@ -7,7 +7,7 @@ namespace WhoAmI.App.Model.Data
     {
         public Guid Id { get; set; }
         public Player Owner { get; set; }
-        public IList<Player> Users { get; set; }
+        public IList<Player> Players { get; set; }
         public LobbySetting Settings { get; set; }
         public Player ActivePlayer { get; set; }
     }

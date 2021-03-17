@@ -1,3 +1,4 @@
+import { PlayerService } from './../../services/player.service';
 import { PlayerImageService } from '../../services/playerimage.service';
 import { Player, PlayerIcon } from '../../models/domain/player.model';
 import { Component, Inject, Input } from '@angular/core';
@@ -17,26 +18,24 @@ export class LobbyPlayerEntryComponent {
   @Input() player?: Player;
 
   constructor(
-    private playerImageService: PlayerImageService
+    private playerImageService: PlayerImageService,
+    private PlayerService: PlayerService
   ) {
-
   }
 
   isOwner(player: Player): boolean {
+    console.log('isOwner='+(player.id === this.lobby.owner.id), player, this.lobby.owner)
     return player.id === this.lobby.owner.id;
+
   }
 
   isSelf(player: Player): boolean {
-    return player.id === '0005'; //TODO
+    const viewer = this.PlayerService.getPlayer();
+    return player.id === (viewer ? viewer.id : null);
   }
 
-  getPlayerIcon(playerIcon: PlayerIcon): string {
-    return this.playerImageService.getImage(playerIcon.id);
-  }
-
-  zeroPad(num, places) {
-    const zero = places - num.toString().length + 1;
-    return Array(+(zero > 0 && zero)).join('0') + num;
+  getPlayerIcon(player: Player): string {
+    return this.playerImageService.getImage(player.icon);
   }
 
   hasPlayerACharacter(player: Player): boolean {

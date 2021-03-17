@@ -28,7 +28,7 @@ export class PlayerImageService {
     return this.imagePath + this.zeroPad(num, 2) + '.png';
   }
 
-  private zeroPad(num, places) {
+  private zeroPad(num: number, places: number) {
     const zero = places - num.toString().length + 1;
     return Array(+(zero > 0 && zero)).join('0') + num;
   }

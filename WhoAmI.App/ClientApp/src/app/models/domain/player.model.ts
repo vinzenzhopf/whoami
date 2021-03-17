@@ -6,7 +6,8 @@ export interface Player {
   characterName: string;
   hasSolved: boolean;
   guessedCharacterCount: number;
-  icon: PlayerIcon;
+  icon: number;
+  //icon: PlayerIcon;
 }
 
 export interface PlayerIcon {

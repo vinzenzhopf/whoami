@@ -12,12 +12,21 @@ namespace WhoAmI.App
 {
     public class Startup
     {
+        static readonly string AngularDevOrigin = "_angularDevOrigin";
+
+        public bool IsDebugMode { get; }
+
+        public IConfiguration Configuration { get; }
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+
+            var debug = Configuration.GetValue<bool>("debug");
+            IsDebugMode = debug;
         }
 
-        public IConfiguration Configuration { get; }
+        
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -31,11 +40,30 @@ namespace WhoAmI.App
             {
                 configuration.RootPath = "ClientApp/dist";
             });
+
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy(name: AngularDevOrigin,
+                    builder =>
+                    {
+                        builder.WithOrigins("http://localhost:4200");
+                    });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            if (IsDebugMode) {
+                app.UseCors(options => options
+                    .AllowAnyOrigin()
+                    .AllowAnyHeader().AllowAnyMethod()
+                );
+                //app.UseCors("AllowAnyPolicy");
+                //app.UseCors(AngularDevOrigin);
+            }
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
